@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowDown, ArrowUpRight, Blocks, Compass, DraftingCompass, Leaf, LockKeyhole, Mountain, Route, Sparkles, UsersRound } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { CornerFrameLink } from "@/components/ui/corner-frame-link";
@@ -24,14 +24,23 @@ const learningPath = ["Comprender", "Crear", "Validar", "Transformar"];
 
 export default function Home() {
   const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+  const heroImageY = useTransform(scrollYProgress, [0, 0.22], ["0%", "11%"]);
+  const heroCopyY = useTransform(scrollYProgress, [0, 0.2], ["0px", "-54px"]);
   const reveal = { initial: reduceMotion ? false : { opacity: 0, y: 26 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.18 }, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const } };
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
+      <motion.div aria-hidden="true" className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <section className="hero relative min-h-[760px] overflow-hidden text-white">
-        <Image src="/hero-andes.png" alt="Paisaje andino estilizado reflejado sobre un salar con una ruta de motivos textiles" fill priority className="object-cover object-[64%_center]" sizes="100vw" />
+        <motion.div aria-hidden="true" className="absolute -inset-x-4 -inset-y-16" style={reduceMotion ? undefined : { y: heroImageY }}>
+          <Image src="/hero-andes.png" alt="" fill priority className="object-cover object-[64%_center] scale-[1.04]" sizes="100vw" />
+        </motion.div>
         <div className="hero-scrim absolute inset-0" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,15,35,.9)_0%,rgba(3,15,35,.58)_42%,rgba(3,15,35,.05)_72%)]" />
+        <div aria-hidden="true" className="hero-grid absolute inset-0" />
+        <motion.div aria-hidden="true" className="hero-orbit hero-orbit-one" animate={reduceMotion ? undefined : { y: [0, -14, 0], rotate: [0, 3, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.div aria-hidden="true" className="hero-orbit hero-orbit-two" animate={reduceMotion ? undefined : { y: [0, 18, 0], x: [0, -8, 0] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }} />
         <header className="relative z-20 mx-auto flex w-full max-w-[1480px] items-center justify-between px-5 py-5 sm:px-8 lg:px-12">
           <a href="#inicio" className="group flex items-center gap-3 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd35a]">
             <span className="grid size-12 place-items-center rounded-full border border-white/25 bg-white/10 shadow-lg backdrop-blur-md"><Mountain aria-hidden="true" className="size-6 text-[#ffd35a]" strokeWidth={1.8} /></span>
@@ -43,10 +52,10 @@ export default function Home() {
           <div className="logo-ficticio" aria-label="Identidad institucional provisional"><span>U</span><span className="hidden sm:inline">UMSA</span></div>
         </header>
         <div id="inicio" className="relative z-10 mx-auto flex min-h-[650px] w-full max-w-[1480px] items-center px-5 pb-24 pt-12 sm:px-8 lg:px-12">
-          <motion.div initial={reduceMotion ? false : { opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }} className="max-w-[820px]">
+          <motion.div style={reduceMotion ? undefined : { y: heroCopyY }} initial={reduceMotion ? false : { opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }} className="max-w-[820px]">
             <Badge className="mb-7 border border-white/20 bg-white/10 px-4 py-2 text-[12px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">Gestión académica 2026 — II</Badge>
             <p className="mb-4 flex items-center gap-3 text-sm font-bold uppercase tracking-[0.24em] text-[#ffd35a]"><span className="h-px w-10 bg-[#ffd35a]" /> Agilidad para transformar</p>
-            <h1 className="hero-title max-w-[800px] text-balance text-[clamp(3.15rem,7.2vw,7.4rem)] font-black leading-[0.88] tracking-[-0.065em]">Turismo que se diseña en movimiento.</h1>
+            <h1 className="hero-title max-w-[800px] text-balance text-[clamp(3.15rem,7.2vw,7.4rem)] font-black leading-[0.88] tracking-[-0.065em]">Turismo que se diseña <span className="hero-highlight">en movimiento.</span></h1>
             <p className="mt-7 max-w-[650px] text-pretty text-lg leading-relaxed text-white/78 sm:text-xl">Metodologías ágiles para crear productos sostenibles, gestionar proyectos colaborativos y liderar la transformación de organizaciones y destinos turísticos.</p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <CornerFrameLink href="#productos">Descubrir los productos <ArrowDown aria-hidden="true" /></CornerFrameLink>
@@ -56,7 +65,7 @@ export default function Home() {
         </div>
         <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/14 bg-[#061a35]/55 backdrop-blur-xl">
           <div className="mx-auto grid max-w-[1480px] grid-cols-2 divide-x divide-white/14 px-5 sm:grid-cols-4 sm:px-8 lg:px-12">
-            {stats.map(([label, value], index) => <div key={label} className={`px-4 py-5 sm:px-7 ${index > 1 ? "border-t border-white/14 sm:border-t-0" : ""}`}><span className="block text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">{label}</span><strong className="mt-1 block text-xl font-black tracking-tight text-white">{value}</strong></div>)}
+            {stats.map(([label, value], index) => <motion.div key={label} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .7 + index * .09 }} className={`px-4 py-5 sm:px-7 ${index > 1 ? "border-t border-white/14 sm:border-t-0" : ""}`}><span className="block text-[11px] font-bold uppercase tracking-[0.2em] text-white/55">{label}</span><strong className="mt-1 block text-xl font-black tracking-tight text-white">{value}</strong></motion.div>)}
           </div>
         </div>
       </section>
@@ -66,7 +75,7 @@ export default function Home() {
         <motion.div {...reveal} className="lg:pt-11">
           <p className="max-w-[760px] text-xl leading-relaxed text-slate-600 sm:text-2xl">Aprenderás a responder a escenarios turísticos complejos mediante colaboración, experimentación y mejora continua. Cada herramienta se convierte en una forma concreta de generar valor para viajeros, comunidades y territorios.</p>
           <div className="mt-12 grid gap-px overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-200 sm:grid-cols-3">
-            {[["7", "unidades de aprendizaje"], ["3", "productos integradores"], ["1", "reto: transformar el turismo"]].map(([value, label]) => <div key={label} className="bg-white p-7 sm:p-8"><strong className="text-4xl font-black tracking-[-0.05em] text-[#006d77]">{value}</strong><span className="mt-2 block text-sm font-semibold leading-snug text-slate-600">{label}</span></div>)}
+            {[["7", "unidades de aprendizaje"], ["3", "productos integradores"], ["1", "reto: transformar el turismo"]].map(([value, label], index) => <motion.div key={label} whileHover={reduceMotion ? undefined : { y: -5 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="metric-card bg-white p-7 sm:p-8"><strong className="text-4xl font-black tracking-[-0.05em] text-primary">{value}</strong><span className="mt-2 block text-sm font-semibold leading-snug text-slate-600">{label}</span><span aria-hidden="true" className="metric-index">0{index + 1}</span></motion.div>)}
           </div>
         </motion.div>
       </section>
@@ -75,7 +84,7 @@ export default function Home() {
         <div className="section-shell">
           <motion.div {...reveal} className="flex flex-col justify-between gap-7 lg:flex-row lg:items-end"><div><p className="eyebrow text-[#69e3d2]">Capacidades para el futuro</p><h2 className="section-title mt-5 max-w-[760px]">Herramientas para crear, validar y liderar.</h2></div><p className="max-w-sm text-base leading-relaxed text-white/60">De la idea inicial a una estrategia de transformación con impacto sostenible.</p></motion.div>
           <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {abilities.map(({ icon: Icon, label }, index) => <motion.article key={label} initial={reduceMotion ? false : { opacity: 0, scale: 0.96, y: 18 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ delay: reduceMotion ? 0 : index * 0.055, duration: 0.45 }} className="group rounded-[1.6rem] border border-white/10 bg-white/[0.055] p-7 transition-colors duration-300 hover:bg-white/[0.095]"><div className="mb-12 grid size-11 place-items-center rounded-full bg-[#69e3d2] text-[#071a35]"><Icon aria-hidden="true" className="size-5" strokeWidth={1.8} /></div><span className="text-lg font-bold leading-snug">{label}</span></motion.article>)}
+            {abilities.map(({ icon: Icon, label }, index) => <motion.article key={label} initial={reduceMotion ? false : { opacity: 0, scale: 0.94, y: 22 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} whileHover={reduceMotion ? undefined : { y: -7 }} viewport={{ once: true, amount: 0.2 }} transition={{ delay: reduceMotion ? 0 : index * 0.055, duration: 0.45 }} className="ability-card group rounded-[1.6rem] border border-white/10 bg-white/[0.055] p-7"><div className="ability-icon mb-12 grid size-11 place-items-center rounded-full bg-secondary text-[#071a35]"><Icon aria-hidden="true" className="size-5" strokeWidth={1.8} /></div><span className="text-lg font-bold leading-snug">{label}</span><span aria-hidden="true" className="ability-number">0{index + 1}</span></motion.article>)}
           </div>
         </div>
       </section>
@@ -84,11 +93,11 @@ export default function Home() {
         <motion.div {...reveal} className="max-w-[820px]"><p className="eyebrow">Productos del semestre</p><h2 className="section-title mt-5">Tres desafíos. Una transformación.</h2><p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">El semestre avanza como una ruta: comprender el problema, construir una solución, validarla y convertir el aprendizaje en cambio.</p></motion.div>
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
           {products.map((product, index) => (
-            <motion.article key={product.number} initial={reduceMotion ? false : { opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.18 }} transition={{ delay: reduceMotion ? 0 : index * 0.08, duration: 0.5 }} aria-disabled={!product.available} className={`product-card ${product.available ? "product-card-active" : "product-card-locked"}`}>
-              <div className="flex items-start justify-between gap-4"><span className="product-number">{product.number}</span><Badge className={product.available ? "bg-[#d8fbf4] text-[#005f59]" : "bg-slate-100 text-slate-500"}>{!product.available && <LockKeyhole aria-hidden="true" className="mr-1 size-3" />}{product.status}</Badge></div>
-              <h3 className="mt-14 text-2xl font-black leading-[1.08] tracking-[-0.035em] sm:text-[1.75rem]">{product.title}</h3><p className="mt-3 text-sm font-semibold leading-relaxed text-[#006d77]">{product.official}</p><p className="mt-5 leading-relaxed text-slate-600">{product.description}</p>
+            <motion.article key={product.number} initial={reduceMotion ? false : { opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} whileHover={reduceMotion ? undefined : { y: product.available ? -10 : -4 }} viewport={{ once: true, amount: 0.18 }} transition={{ delay: reduceMotion ? 0 : index * 0.08, duration: 0.5 }} aria-disabled={!product.available} className={`product-card ${product.available ? "product-card-active" : "product-card-locked"}`}>
+              <div className="flex items-start justify-between gap-4"><span className="product-number">{product.number}</span><Badge className={product.available ? "bg-secondary text-secondary-foreground" : "bg-slate-100 text-slate-500"}>{!product.available && <LockKeyhole aria-hidden="true" className="mr-1 size-3" />}{product.status}</Badge></div>
+              <h3 className="mt-14 text-2xl font-black leading-[1.08] tracking-[-0.035em] sm:text-[1.75rem]">{product.title}</h3><p className="mt-3 text-sm font-semibold leading-relaxed text-primary">{product.official}</p><p className="mt-5 leading-relaxed text-slate-600">{product.description}</p>
               <div className="mt-7 flex flex-wrap gap-2">{product.tags.map((tag) => <span key={tag} className="topic-chip">{tag}</span>)}</div>
-              <div className="mt-auto pt-10">{product.available ? <div className="flex items-center justify-between border-t border-slate-200 pt-5 text-sm font-extrabold text-[#071a35]"><span>Primer producto</span><ArrowUpRight aria-hidden="true" className="size-5 text-[#e96f2d]" /></div> : <div className="border-t border-slate-200 pt-5 text-sm font-semibold text-slate-400">Se habilitará durante el semestre</div>}</div>
+              <div className="mt-auto pt-10">{product.available ? <div className="flex items-center justify-between border-t border-slate-200 pt-5 text-sm font-extrabold text-[#071a35]"><span>Primer producto</span><span className="product-arrow"><ArrowUpRight aria-hidden="true" className="size-5" /></span></div> : <div className="border-t border-slate-200 pt-5 text-sm font-semibold text-slate-400">Se habilitará durante el semestre</div>}</div>
             </motion.article>
           ))}
         </div>
