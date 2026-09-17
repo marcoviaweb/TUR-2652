@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { ArrowDown, ArrowUpRight, Blocks, Compass, DraftingCompass, Leaf, LockKeyhole, Mountain, Route, Sparkles, UsersRound } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Blocks, Compass, DraftingCompass, Leaf, LockKeyhole, Route, Sparkles, UsersRound } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { CornerFrameLink } from "@/components/ui/corner-frame-link";
 
-const stats = [["Gestión", "2026 — II"], ["Créditos", "06"], ["Clases", "40"], ["Horas", "180"]];
+const stats = [["Gestión", "2026 - II"], ["Créditos", "06"], ["Clases", "40"], ["Horas", "180"]];
 const abilities = [
   { icon: DraftingCompass, label: "Diseñar productos turísticos sostenibles" },
   { icon: UsersRound, label: "Colaborar y crear valor con Scrum" },
@@ -43,8 +43,8 @@ export default function Home() {
         <motion.div aria-hidden="true" className="hero-orbit hero-orbit-two" animate={reduceMotion ? undefined : { y: [0, 18, 0], x: [0, -8, 0] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }} />
         <header className="relative z-20 mx-auto flex w-full max-w-[1480px] items-center justify-between px-5 py-5 sm:px-8 lg:px-12">
           <a href="#inicio" className="group flex items-center gap-3 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd35a]">
-            <span className="grid size-12 place-items-center rounded-full border border-white/25 bg-white/10 shadow-lg backdrop-blur-md"><Mountain aria-hidden="true" className="size-6 text-[#ffd35a]" strokeWidth={1.8} /></span>
-            <span><span className="block text-[11px] font-bold uppercase tracking-[0.24em] text-white/60">Carrera de Turismo</span><span className="block text-lg font-extrabold tracking-tight">TUR—2652</span></span>
+            <span className="grid size-12 place-items-center overflow-hidden rounded-full border border-white/25 bg-white/10 p-1.5 shadow-lg backdrop-blur-md"><Image src="/logo-turismo.svg" alt="" width={40} height={40} className="size-full object-contain" /></span>
+            <span><span className="block text-[11px] font-bold uppercase tracking-[0.24em] text-white/60">Carrera de Turismo</span><span className="block text-lg font-extrabold tracking-tight">TUR-2652</span></span>
           </a>
           <nav aria-label="Navegación principal" className="hidden items-center gap-8 text-sm font-semibold text-white/75 md:flex">
             <a className="nav-link" href="#asignatura">Asignatura</a><a className="nav-link" href="#aprendizajes">Aprendizajes</a><a className="nav-link" href="#productos">Productos</a>
@@ -53,10 +53,10 @@ export default function Home() {
         </header>
         <div id="inicio" className="relative z-10 mx-auto flex min-h-[650px] w-full max-w-[1480px] items-center px-5 pb-24 pt-12 sm:px-8 lg:px-12">
           <motion.div style={reduceMotion ? undefined : { y: heroCopyY }} initial={reduceMotion ? false : { opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }} className="max-w-[820px]">
-            <Badge className="mb-7 border border-white/20 bg-white/10 px-4 py-2 text-[12px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">Gestión académica 2026 — II</Badge>
+            <Badge className="mb-7 border border-white/20 bg-white/10 px-4 py-2 text-[12px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">Gestión académica 2026 - II</Badge>
             <p className="mb-4 flex items-center gap-3 text-sm font-bold uppercase tracking-[0.24em] text-[#ffd35a]"><span className="h-px w-10 bg-[#ffd35a]" /> Agilidad para transformar</p>
-            <h1 className="hero-title max-w-[800px] text-balance text-[clamp(3.15rem,7.2vw,7.4rem)] font-black leading-[0.88] tracking-[-0.065em]">Turismo que se diseña <span className="hero-highlight">en movimiento.</span></h1>
-            <p className="mt-7 max-w-[650px] text-pretty text-lg leading-relaxed text-white/78 sm:text-xl">Metodologías ágiles para crear productos sostenibles, gestionar proyectos colaborativos y liderar la transformación de organizaciones y destinos turísticos.</p>
+            <h1 className="hero-title max-w-[800px] text-balance text-[clamp(3.15rem,7.2vw,7.4rem)] font-black leading-[0.88] tracking-[-0.065em]">Turismo que se adapta <span className="hero-highlight">al cambio.</span></h1>
+            <p className="mt-7 max-w-[650px] text-pretty text-lg leading-relaxed text-white/78 sm:text-xl">Prácticas ágiles para crear productos sostenibles, gestionar proyectos colaborativos y liderar la transformación de organizaciones y destinos turísticos.</p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <CornerFrameLink href="#productos">Descubrir los productos <ArrowDown aria-hidden="true" /></CornerFrameLink>
               <span className="text-sm font-semibold text-white/60">Carrera de Turismo · UMSA</span>
@@ -71,9 +71,9 @@ export default function Home() {
       </section>
 
       <section id="asignatura" className="section-shell grid gap-12 py-24 lg:grid-cols-[.78fr_1.22fr] lg:py-32">
-        <motion.div {...reveal}><p className="eyebrow">La asignatura</p><h2 className="section-title mt-5">Pensar distinto para hacer turismo mejor.</h2></motion.div>
+        <motion.div {...reveal}><p className="eyebrow">La asignatura</p><h2 className="section-title mt-5">Pensar distinto para hacer mejor turismo.</h2></motion.div>
         <motion.div {...reveal} className="lg:pt-11">
-          <p className="max-w-[760px] text-xl leading-relaxed text-slate-600 sm:text-2xl">Aprenderás a responder a escenarios turísticos complejos mediante colaboración, experimentación y mejora continua. Cada herramienta se convierte en una forma concreta de generar valor para viajeros, comunidades y territorios.</p>
+          <p className="max-w-[760px] text-xl leading-relaxed text-slate-600 sm:text-2xl">Responder a escenarios turísticos complejos mediante colaboración, experimentación y mejora continua. Cada herramienta se convierte en una forma concreta de generar valor para viajeros, comunidades y territorios.</p>
           <div className="mt-12 grid gap-px overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-200 sm:grid-cols-3">
             {[["7", "unidades de aprendizaje"], ["3", "productos integradores"], ["1", "reto: transformar el turismo"]].map(([value, label], index) => <motion.div key={label} whileHover={reduceMotion ? undefined : { y: -5 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="metric-card bg-white p-7 sm:p-8"><strong className="text-4xl font-black tracking-[-0.05em] text-primary">{value}</strong><span className="mt-2 block text-sm font-semibold leading-snug text-slate-600">{label}</span><span aria-hidden="true" className="metric-index">0{index + 1}</span></motion.div>)}
           </div>
@@ -107,7 +107,7 @@ export default function Home() {
         <div className="section-shell"><motion.div {...reveal} className="grid gap-12 lg:grid-cols-[.7fr_1.3fr] lg:items-center"><div><p className="eyebrow">Ruta de aprendizaje</p><h2 className="section-title mt-5">Avanzar también es aprender.</h2><p className="mt-5 max-w-md leading-relaxed text-slate-600">Cada etapa recupera lo aprendido y lo convierte en una solución más clara, viable y relevante.</p></div><div className="learning-route">{learningPath.map((item, index) => <div key={item} className="route-stop"><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong>{index < learningPath.length - 1 && <Route aria-hidden="true" className="route-icon" />}</div>)}</div></motion.div></div>
       </section>
 
-      <footer className="bg-[#041225] py-10 text-white"><div className="section-shell flex flex-col justify-between gap-8 sm:flex-row sm:items-end"><div className="flex items-center gap-4"><span className="grid size-12 place-items-center rounded-full border border-white/15 bg-white/5"><Mountain aria-hidden="true" className="size-5 text-[#ffd35a]" /></span><div><strong className="block text-lg">TUR—2652</strong><span className="text-sm text-white/50">Carrera de Turismo · Gestión 2026—II</span></div></div><p className="max-w-xs text-sm leading-relaxed text-white/45 sm:text-right">Sitio académico informativo no oficial. Los símbolos institucionales son provisionales.</p></div></footer>
+      <footer className="bg-[#041225] py-10 text-white"><div className="section-shell flex flex-col justify-between gap-8 sm:flex-row sm:items-end"><div className="flex items-center gap-4"><span className="grid size-12 place-items-center overflow-hidden rounded-full border border-white/15 bg-white/5 p-1.5"><Image src="/logo-turismo.svg" alt="" width={40} height={40} className="size-full object-contain" /></span><div><strong className="block text-lg">TUR-2652</strong><span className="text-sm text-white/50">Carrera de Turismo · Gestión 2026-II</span></div></div><p className="max-w-xs text-sm leading-relaxed text-white/45 sm:text-right">Sitio web informativo no oficial.</p></div></footer>
     </main>
   );
 }
