@@ -26,6 +26,16 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 .scroll-progress { position: fixed; inset: 0 0 auto; z-index: 100; height: 4px; transform-origin: 0 50%; background: linear-gradient(90deg,var(--secondary),var(--sun),var(--accent)); box-shadow: 0 0 18px rgba(246,196,83,.55); }
 .section-shell { width: min(100% - 2.5rem, 1384px); margin-inline: auto; }
 .hero-scrim { background: linear-gradient(180deg, rgba(3,15,35,.15), rgba(3,15,35,.03) 42%, rgba(3,15,35,.78)); }
+.hero-mist { position:absolute; z-index:1; right:0; bottom:23%; width:68%; height:15%; filter:blur(24px); background:linear-gradient(90deg,transparent,rgba(211,224,235,.34),rgba(255,255,255,.12),transparent); mask-image:linear-gradient(90deg,transparent,black 24%,black 78%,transparent); pointer-events:none; }
+.city-lights { position:absolute; z-index:2; inset:0; pointer-events:none; }
+.city-lights i { position:absolute; width:4px; height:4px; border-radius:50%; background:var(--sun); box-shadow:0 0 6px 2px rgba(246,196,83,.65); animation:city-twinkle 3.2s ease-in-out infinite; }
+.city-lights i:nth-child(1) { left:57%; top:72%; animation-delay:.2s; }
+.city-lights i:nth-child(2) { left:69%; top:77%; animation-delay:1.3s; }
+.city-lights i:nth-child(3) { left:82%; top:68%; animation-delay:2.1s; }
+.city-lights i:nth-child(4) { left:91%; top:82%; animation-delay:.8s; }
+.city-lights i:nth-child(5) { left:76%; top:88%; animation-delay:2.7s; }
+.city-lights i:nth-child(6) { left:48%; top:84%; animation-delay:1.8s; }
+@keyframes city-twinkle { 0%,100% { opacity:.2; transform:scale(.65); } 45% { opacity:1; transform:scale(1.35); } }
 .hero-grid { opacity: .16; background-image: linear-gradient(rgba(255,255,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.13) 1px,transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(to right,black,transparent 72%); }
 .hero-orbit { position: absolute; border: 1px solid rgba(255,255,255,.24); border-radius: 999px; pointer-events: none; }
 .hero-orbit::after { content:""; position:absolute; width:10px; height:10px; border-radius:50%; background:var(--sun); box-shadow:0 0 26px rgba(246,196,83,.9); }
@@ -72,4 +82,4 @@ body { margin: 0; background: var(--background); color: var(--foreground); font-
 .route-icon { width: 24px; color: var(--accent); }
 @media (min-width: 640px) { .section-shell { width: min(100% - 4rem, 1384px); } .product-card { padding: 2rem; } }
 @media (max-width: 639px) { .hero { min-height: 860px; } .hero-title { font-size: clamp(3rem, 16vw, 4.7rem); } .route-stop { grid-template-columns: 38px 1fr; } .route-icon { display: none; } .hero-orbit-one { right:-130px; top:23%; } .hero-orbit-two { display:none; } .hero-grid { background-size:48px 48px; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .city-lights i { opacity:.65; transform:none; } }

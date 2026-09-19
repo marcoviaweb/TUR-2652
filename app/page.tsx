@@ -34,10 +34,12 @@ export default function Home() {
       <motion.div aria-hidden="true" className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <section className="hero relative min-h-[760px] overflow-hidden text-white">
         <motion.div aria-hidden="true" className="absolute -inset-x-4 -inset-y-16" style={reduceMotion ? undefined : { y: heroImageY }}>
-          <Image src="/hero-andes.png" alt="" fill priority className="object-cover object-[64%_center] scale-[1.04]" sizes="100vw" />
+          <Image src="/hero-illimani.png" alt="" fill priority className="object-cover object-[68%_center] scale-[1.04]" sizes="100vw" />
         </motion.div>
         <div className="hero-scrim absolute inset-0" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,15,35,.9)_0%,rgba(3,15,35,.58)_42%,rgba(3,15,35,.05)_72%)]" />
+        <motion.div aria-hidden="true" className="hero-mist" animate={reduceMotion ? undefined : { x: ["-7%", "7%", "-7%"], opacity: [.16, .3, .16] }} transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }} />
+        <div aria-hidden="true" className="city-lights"><i /><i /><i /><i /><i /><i /></div>
         <div aria-hidden="true" className="hero-grid absolute inset-0" />
         <motion.div aria-hidden="true" className="hero-orbit hero-orbit-one" animate={reduceMotion ? undefined : { y: [0, -14, 0], rotate: [0, 3, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} />
         <motion.div aria-hidden="true" className="hero-orbit hero-orbit-two" animate={reduceMotion ? undefined : { y: [0, 18, 0], x: [0, -8, 0] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }} />
