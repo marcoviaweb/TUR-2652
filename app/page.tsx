@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowDown, ArrowUpRight, Blocks, Compass, DraftingCompass, Leaf, LockKeyhole, Route, Sparkles, UsersRound } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -94,14 +95,15 @@ export default function Home() {
       <section id="productos" className="section-shell py-24 lg:py-32">
         <motion.div {...reveal} className="max-w-[820px]"><p className="eyebrow">Productos del semestre</p><h2 className="section-title mt-5">Tres desafíos. Una transformación.</h2><p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">El semestre avanza como una ruta: comprender el problema, construir una solución, validarla y convertir el aprendizaje en cambio.</p></motion.div>
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
-          {products.map((product, index) => (
-            <motion.article key={product.number} initial={reduceMotion ? false : { opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} whileHover={reduceMotion ? undefined : { y: product.available ? -10 : -4 }} viewport={{ once: true, amount: 0.18 }} transition={{ delay: reduceMotion ? 0 : index * 0.08, duration: 0.5 }} aria-disabled={!product.available} className={`product-card ${product.available ? "product-card-active" : "product-card-locked"}`}>
+          {products.map((product, index) => {
+            const card = <motion.article initial={reduceMotion ? false : { opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} whileHover={reduceMotion ? undefined : { y: product.available ? -10 : -4 }} viewport={{ once: true, amount: 0.18 }} transition={{ delay: reduceMotion ? 0 : index * 0.08, duration: 0.5 }} aria-disabled={!product.available} className={`product-card ${product.available ? "product-card-active" : "product-card-locked"}`}>
               <div className="flex items-start justify-between gap-4"><span className="product-number">{product.number}</span><Badge className={product.available ? "bg-secondary text-secondary-foreground" : "bg-slate-100 text-slate-500"}>{!product.available && <LockKeyhole aria-hidden="true" className="mr-1 size-3" />}{product.status}</Badge></div>
               <h3 className="mt-14 text-2xl font-black leading-[1.08] tracking-[-0.035em] sm:text-[1.75rem]">{product.title}</h3><p className="mt-3 text-sm font-semibold leading-relaxed text-primary">{product.official}</p><p className="mt-5 leading-relaxed text-slate-600">{product.description}</p>
               <div className="mt-7 flex flex-wrap gap-2">{product.tags.map((tag) => <span key={tag} className="topic-chip">{tag}</span>)}</div>
-              <div className="mt-auto pt-10">{product.available ? <div className="flex items-center justify-between border-t border-slate-200 pt-5 text-sm font-extrabold text-[#071a35]"><span>Primer producto</span><span className="product-arrow"><ArrowUpRight aria-hidden="true" className="size-5" /></span></div> : <div className="border-t border-slate-200 pt-5 text-sm font-semibold text-slate-400">Se habilitará durante el semestre</div>}</div>
-            </motion.article>
-          ))}
+              <div className="mt-auto pt-10">{product.available ? <div className="flex items-center justify-between border-t border-slate-200 pt-5 text-sm font-extrabold text-[#071a35]"><span>Explorar Producto 1</span><span className="product-arrow"><ArrowUpRight aria-hidden="true" className="size-5" /></span></div> : <div className="border-t border-slate-200 pt-5 text-sm font-semibold text-slate-400">Se habilitará durante el semestre</div>}</div>
+            </motion.article>;
+            return product.available ? <Link key={product.number} href="/producto-1" className="product-card-link rounded-[2rem] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-primary">{card}</Link> : <div key={product.number}>{card}</div>;
+          })}
         </div>
       </section>
 
