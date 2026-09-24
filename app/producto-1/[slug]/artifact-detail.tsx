@@ -5,9 +5,11 @@ import { motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, Check, Route } from "lucide-react";
 import { artifacts, getArtifact, phases, productOne } from "@/lib/product-one";
 import { ProductOneHeader } from "@/components/product-one-header";
+import { ConceptServiceDetail } from "./concept-service-detail";
 
 export function ArtifactDetail({ slug }: { slug: string }) {
   const reduceMotion = useReducedMotion();
+  if (slug === "concepto-del-servicio") return <ConceptServiceDetail />;
   const artifact = getArtifact(slug)!;
   const Icon = artifact.icon;
   const index = artifacts.findIndex((item) => item.slug === artifact.slug);
