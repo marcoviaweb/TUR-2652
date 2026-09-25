@@ -1,7 +1,7 @@
 "use client";
+/* eslint-disable @next/next/no-html-link-for-pages -- full document navigation is required by the deployed Sites runtime */
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import {
   ArrowDown, ArrowLeft, ArrowRight, AudioLines, BusFront, Camera,
@@ -59,7 +59,7 @@ export function ConceptServiceDetail() {
         <ProductOneHeader compact />
         <div className="section-shell relative z-10 flex min-h-[760px] items-end pb-20 pt-20 lg:pb-28">
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 35 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }} className="max-w-[920px]">
-            <Link className="artifact-breadcrumb" href="/producto-1"><ArrowLeft aria-hidden="true" /> Ruta del Producto 1</Link>
+            <a className="artifact-breadcrumb" href="/producto-1"><ArrowLeft aria-hidden="true" /> Ruta del Producto 1</a>
             <p className="concept-kicker mt-10"><span /> Fase 01 · Descubrir · Artefacto 01</p>
             <h1>Concepto<br /><em>del servicio</em></h1>
             <p className="concept-hero-lead">La ficha que convierte una idea turística en una experiencia comprensible: define para quién existe, cómo se vive, qué necesita y por qué es diferente.</p>
@@ -125,7 +125,7 @@ export function ConceptServiceDetail() {
         <div className="section-shell"><motion.div {...reveal} className="concept-difference-card"><div className="concept-difference-moon"><Moon aria-hidden="true" /></div><p>Factor de innovación y diferenciación</p><h2>El visitante deja de ser espectador y se convierte en protagonista.</h2><div className="concept-difference-copy"><p>La tecnología de realidad aumentada ayuda a explorar el paisaje; los audífonos crean una capa de sonidos, música y relatos; y la vestimenta típica acerca al visitante a la identidad cultural boliviana.</p><p>La propuesta combina participación, cultura, naturaleza y tecnología accesible con garantías de seguridad, un estándar que busca diferenciarla de las ofertas tradicionales del sector.</p></div><div className="concept-values"><span><Check /> Inmersiva</span><span><Check /> Multisensorial</span><span><Check /> Participativa</span><span><Check /> Segura</span></div></motion.div></div>
       </section>
 
-      <nav className="concept-next section-shell" aria-label="Navegación entre artefactos"><Link href="/producto-1"><ArrowLeft /><span><small>Volver</small><strong>Ruta del Producto 1</strong></span></Link><Link href="/producto-1/vision-del-producto"><span><small>Siguiente artefacto</small><strong>Visión del producto</strong></span><ArrowRight /></Link></nav>
+      <nav className="concept-next section-shell" aria-label="Navegación entre artefactos"><a href="/producto-1"><ArrowLeft /><span><small>Volver</small><strong>Ruta del Producto 1</strong></span></a><a href="/producto-1/vision-del-producto"><span><small>Siguiente artefacto</small><strong>Visión del producto</strong></span><ArrowRight /></a></nav>
       <footer className="lunar-footer py-8"><div className="section-shell flex flex-col gap-2 text-sm sm:flex-row sm:justify-between"><span>TUR-2652 · Producto 1</span><span>Sitio informativo no oficial</span></div></footer>
     </main>
   );

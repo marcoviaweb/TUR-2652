@@ -1,7 +1,7 @@
 "use client";
+/* eslint-disable @next/next/no-html-link-for-pages -- full document navigation is required by the deployed Sites runtime */
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowDown, ArrowUpRight, Blocks, Compass, DraftingCompass, Leaf, LockKeyhole, Route, Sparkles, UsersRound } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -102,7 +102,7 @@ export default function Home() {
               <div className="mt-7 flex flex-wrap gap-2">{product.tags.map((tag) => <span key={tag} className="topic-chip">{tag}</span>)}</div>
               <div className="mt-auto pt-10">{product.available ? <div className="flex items-center justify-between border-t border-slate-200 pt-5 text-sm font-extrabold text-[#071a35]"><span>Explorar Producto 1</span><span className="product-arrow"><ArrowUpRight aria-hidden="true" className="size-5" /></span></div> : <div className="border-t border-slate-200 pt-5 text-sm font-semibold text-slate-400">Se habilitará durante el semestre</div>}</div>
             </motion.article>;
-            return product.available ? <Link key={product.number} href="/producto-1" className="product-card-link rounded-[2rem] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-primary">{card}</Link> : <div key={product.number}>{card}</div>;
+            return product.available ? <a key={product.number} href="/producto-1" className="product-card-link rounded-[2rem] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-primary">{card}</a> : <div key={product.number}>{card}</div>;
           })}
         </div>
       </section>

@@ -1,6 +1,6 @@
 "use client";
+/* eslint-disable @next/next/no-html-link-for-pages -- full document navigation is required by the deployed Sites runtime */
 
-import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, Check, Route } from "lucide-react";
 import { artifacts, getArtifact, phases, productOne } from "@/lib/product-one";
@@ -25,7 +25,7 @@ export function ArtifactDetail({ slug }: { slug: string }) {
         <div aria-hidden="true" className="artifact-grid" />
         <div className="section-shell relative z-10 grid gap-10 pb-20 pt-16 lg:grid-cols-[1fr_330px] lg:items-end lg:pb-24 lg:pt-24">
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65 }}>
-            <Link className="artifact-breadcrumb" href="/producto-1"><ArrowLeft aria-hidden="true" /> Producto 1</Link>
+            <a className="artifact-breadcrumb" href="/producto-1"><ArrowLeft aria-hidden="true" /> Producto 1</a>
             <p className="product-kicker mt-10">{phase.number} · {phase.title} · Artefacto {String(artifact.order).padStart(2, "0")}</p>
             <h1>{artifact.title}</h1>
             <p>{artifact.short}</p>
@@ -48,8 +48,8 @@ export function ArtifactDetail({ slug }: { slug: string }) {
         <motion.aside {...reveal} className="artifact-connection"><Route aria-hidden="true" /><div><p className="eyebrow">Conexión metodológica</p><h2>Ningún artefacto trabaja aislado.</h2><p>La información creada aquí alimenta las decisiones del siguiente paso y puede revisarse cuando el equipo aprende algo nuevo del visitante o de la operación.</p></div></motion.aside>
 
         <nav className="artifact-pagination" aria-label="Navegación entre artefactos">
-          {previous ? <Link href={`/producto-1/${previous.slug}`}><ArrowLeft aria-hidden="true" /><span><small>Anterior</small><strong>{previous.title}</strong></span></Link> : <Link href="/producto-1"><ArrowLeft aria-hidden="true" /><span><small>Volver</small><strong>Ruta completa</strong></span></Link>}
-          {next ? <Link className="artifact-next" href={`/producto-1/${next.slug}`}><span><small>Siguiente</small><strong>{next.title}</strong></span><ArrowRight aria-hidden="true" /></Link> : <Link className="artifact-next" href="/producto-1"><span><small>Finalizar</small><strong>Ver la ruta completa</strong></span><ArrowRight aria-hidden="true" /></Link>}
+          {previous ? <a href={`/producto-1/${previous.slug}`}><ArrowLeft aria-hidden="true" /><span><small>Anterior</small><strong>{previous.title}</strong></span></a> : <a href="/producto-1"><ArrowLeft aria-hidden="true" /><span><small>Volver</small><strong>Ruta completa</strong></span></a>}
+          {next ? <a className="artifact-next" href={`/producto-1/${next.slug}`}><span><small>Siguiente</small><strong>{next.title}</strong></span><ArrowRight aria-hidden="true" /></a> : <a className="artifact-next" href="/producto-1"><span><small>Finalizar</small><strong>Ver la ruta completa</strong></span><ArrowRight aria-hidden="true" /></a>}
         </nav>
       </section>
       <footer className="bg-[#030f20] py-8 text-white"><div className="section-shell flex flex-col gap-2 text-sm text-white/55 sm:flex-row sm:justify-between"><span>TUR-2652 · Producto 1</span><span>Sitio informativo no oficial</span></div></footer>
