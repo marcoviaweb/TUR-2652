@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable @next/next/no-html-link-for-pages -- full document navigation is required by the deployed Sites runtime */
 
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
@@ -58,7 +57,7 @@ export default function ProductOnePage() {
 
       <section className="lunar-people" aria-label="Momentos de la experiencia turística">
         <div className="section-shell py-24 lg:py-36">
-          <motion.div {...reveal} className="lunar-section-heading lunar-section-heading-light"><div><p className="lunar-eyebrow">Así se vive</p><h2>No imagines el viaje.<br />Imagínate dentro.</h2></div><p>Una experiencia para mirar La Paz desde otra perspectiva, explorar con curiosidad y compartir su cultura.</p></motion.div>
+          <motion.div {...reveal} className="lunar-section-heading lunar-section-heading-light"><div><p className="lunar-eyebrow">Así se vive</p><h2>La Paz te espera.<br />Ven a vivirla.</h2></div><p>Una experiencia para mirar La Paz desde otra perspectiva, explorar con curiosidad y compartir su cultura.</p></motion.div>
           <div className="lunar-people-grid">
             <motion.figure {...reveal} className="lunar-people-card lunar-people-card-main"><Image src="/producto1-teleferico.webp" alt="Teleférico rojo sobre La Paz con viajeros y el Illimani iluminado al amanecer" fill sizes="(min-width: 900px) 60vw, 100vw" className="object-cover" /><figcaption><span>01 · Elevarse</span><strong>La aventura comienza sobre una ciudad extraordinaria.</strong></figcaption></motion.figure>
             <motion.figure {...reveal} className="lunar-people-card"><Image src="/producto1-valle.webp" alt="Viajeros contemplan la inmensidad de las formaciones del Valle de la Luna" fill sizes="(min-width: 900px) 40vw, 100vw" className="object-cover" /><figcaption><span>02 · Explorar</span><strong>Encuentra un paisaje que parece de otro mundo.</strong></figcaption></motion.figure>

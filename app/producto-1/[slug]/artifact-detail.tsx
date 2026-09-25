@@ -6,10 +6,13 @@ import { ArrowLeft, ArrowRight, Check, Route } from "lucide-react";
 import { artifacts, getArtifact, phases, productOne } from "@/lib/product-one";
 import { ProductOneHeader } from "@/components/product-one-header";
 import { ConceptServiceDetail } from "./concept-service-detail";
+import { ProductStrategyDetail, ProductVisionDetail } from "./vision-strategy-detail";
 
 export function ArtifactDetail({ slug }: { slug: string }) {
   const reduceMotion = useReducedMotion();
   if (slug === "concepto-del-servicio") return <ConceptServiceDetail />;
+  if (slug === "vision-del-producto") return <ProductVisionDetail />;
+  if (slug === "estrategia-del-producto") return <ProductStrategyDetail />;
   const artifact = getArtifact(slug)!;
   const Icon = artifact.icon;
   const index = artifacts.findIndex((item) => item.slug === artifact.slug);
