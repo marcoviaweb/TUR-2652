@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
-import { ArrowDown, ArrowUpRight, CableCar, Ear, Eye, Footprints, Hand, MapPin, Mountain, Music2, Sparkles, UtensilsCrossed, Wind } from "lucide-react";
+import { ArrowDown, ArrowUpRight, CableCar, Download, Ear, ExternalLink, Eye, FileText, Footprints, Hand, MapPin, Mountain, Music2, Play, Sparkles, UtensilsCrossed, Wind } from "lucide-react";
 import { artifacts, phases } from "@/lib/product-one";
 import { ProductOneHeader } from "@/components/product-one-header";
 
@@ -48,7 +48,19 @@ export default function ProductOnePage() {
         <div className="lunar-hero-index"><span>01</span><i /><small>Un viaje multisensorial</small></div>
       </section>
 
-      <section id="experiencia" className="lunar-manifesto"><div className="section-shell grid gap-12 py-24 lg:grid-cols-[.72fr_1.28fr] lg:py-36"><motion.div {...reveal}><p className="lunar-eyebrow">La promesa</p><span className="lunar-moon-mark"><Mountain aria-hidden="true" /></span></motion.div><motion.div {...reveal}><h2>No vienes solo a observar. Vienes a formar parte del paisaje.</h2><div className="mt-10 grid gap-8 border-t border-[#9d6b47]/25 pt-8 sm:grid-cols-2"><p>La experiencia conecta el pulso urbano del teleférico con el silencio mineral del Valle de la Luna.</p><p>El visitante viaja, escucha, descubre, prueba y participa en una historia construida con territorio y cultura viva.</p></div></motion.div></div></section>
+      <section id="experiencia" className="lunar-manifesto"><div className="section-shell py-24 lg:py-36"><div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr]"><motion.div {...reveal}><p className="lunar-eyebrow">La promesa</p><span className="lunar-moon-mark"><Mountain aria-hidden="true" /></span></motion.div><motion.div {...reveal}><h2>No vienes solo a observar. Vienes a formar parte del paisaje.</h2><div className="mt-10 grid gap-8 border-t border-[#9d6b47]/25 pt-8 sm:grid-cols-2"><p>La experiencia conecta el pulso urbano del teleférico con el silencio mineral del Valle de la Luna.</p><p>El visitante viaja, escucha, descubre, prueba y participa en una historia construida con territorio y cultura viva.</p></div></motion.div></div>
+        <div className="lunar-promise-media">
+          <motion.article {...reveal} className="lunar-video-card">
+            <div className="lunar-media-heading"><span><Play aria-hidden="true" /></span><div><p>Conoce la experiencia</p><h3>Una travesía entre el cielo y la luna</h3></div></div>
+            <div className="lunar-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/JvRf_H2Sz7c?rel=0" title="Video de La Paz desde las alturas a la luna" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+          </motion.article>
+          <motion.article {...reveal} className="lunar-document-card">
+            <div className="lunar-document-icon"><FileText aria-hidden="true" /><span>PDF</span></div>
+            <div><p>Documento del producto</p><h3>Propuesta integral</h3><span>Consulta el documento completo de la experiencia turística en una nueva pestaña o guárdalo en tu dispositivo.</span></div>
+            <div className="lunar-document-actions"><a href="/documento.pdf" target="_blank" rel="noopener noreferrer">Abrir PDF <ExternalLink aria-hidden="true" /></a><a href="/documento.pdf" download="documento.pdf">Descargar <Download aria-hidden="true" /></a></div>
+          </motion.article>
+        </div>
+      </div></section>
 
       <section className="lunar-journey"><div className="section-shell py-24 lg:py-32">
         <motion.div {...reveal} className="lunar-section-heading"><div><p className="lunar-eyebrow text-[#efbe72]">El recorrido</p><h2>De la ciudad<br />al paisaje lunar.</h2></div><p>Cuatro momentos transforman un recorrido turístico en una vivencia personal.</p></motion.div>
