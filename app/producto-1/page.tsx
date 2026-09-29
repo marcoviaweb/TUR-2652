@@ -54,16 +54,18 @@ export default function ProductOnePage() {
             <div className="lunar-media-heading"><span><Play aria-hidden="true" /></span><div><p>Conoce la experiencia</p><h3>Una travesía entre el cielo y la luna</h3></div></div>
             <div className="lunar-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/JvRf_H2Sz7c?rel=0" title="Video de La Paz desde las alturas a la luna" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
           </motion.article>
-          <motion.article {...reveal} className="lunar-document-card">
-            <div className="lunar-document-icon"><FileText aria-hidden="true" /><span>PDF</span></div>
-            <div><p>Documento del producto</p><h3>Una travesía entre cielo y luna</h3><span>Consulta la propuesta integral de la experiencia turística en una nueva pestaña o guárdala en tu dispositivo.</span></div>
-            <div className="lunar-document-actions"><a href="/Una_Traves%C3%ADa_Entre_Cielo_Luna.pdf" target="_blank" rel="noopener noreferrer">Abrir propuesta <ExternalLink aria-hidden="true" /></a><a href="/Una_Traves%C3%ADa_Entre_Cielo_Luna.pdf" download="Una_Travesía_Entre_Cielo_Luna.pdf">Descargar <Download aria-hidden="true" /></a></div>
-          </motion.article>
-          <motion.article {...reveal} className="lunar-document-card lunar-guide-card">
-            <div className="lunar-document-icon"><FileText aria-hidden="true" /><span>GUÍA PDF</span></div>
-            <div><p>Metodología de trabajo</p><h3>Guía para elaborar proyectos turísticos</h3><span>Aprende a desarrollar servicios turísticos aplicando Agile y Scrum, desde la idea inicial hasta la validación y ejecución.</span></div>
-            <div className="lunar-document-actions"><a href="/Guia_Desarrollo_Agil_Servicios_Turisticos_UMSA.pdf" target="_blank" rel="noopener noreferrer">Abrir guía <ExternalLink aria-hidden="true" /></a><a href="/Guia_Desarrollo_Agil_Servicios_Turisticos_UMSA.pdf" download="Guia_Desarrollo_Agil_Servicios_Turisticos_UMSA.pdf">Descargar <Download aria-hidden="true" /></a></div>
-          </motion.article>
+          <div className="lunar-document-stack">
+            <motion.article {...reveal} className="lunar-document-card">
+              <div className="lunar-document-icon"><FileText aria-hidden="true" /><span>PDF</span></div>
+              <div><p>Documento del producto</p><h3>Una travesía entre cielo y luna</h3><span>Consulta la propuesta integral en otra pestaña o guárdala en tu dispositivo.</span></div>
+              <div className="lunar-document-actions"><a href="/Una_Traves%C3%ADa_Entre_Cielo_Luna.pdf" target="_blank" rel="noopener noreferrer">Abrir propuesta <ExternalLink aria-hidden="true" /></a><a href="/Una_Traves%C3%ADa_Entre_Cielo_Luna.pdf" download="Una_Travesía_Entre_Cielo_Luna.pdf">Descargar <Download aria-hidden="true" /></a></div>
+            </motion.article>
+            <motion.article {...reveal} className="lunar-document-card lunar-guide-card">
+              <div className="lunar-document-icon"><FileText aria-hidden="true" /><span>GUÍA PDF</span></div>
+              <div><p>Metodología de trabajo</p><h3>Guía para elaborar proyectos turísticos</h3><span>Desarrolla servicios turísticos con Agile y Scrum, desde la idea hasta la ejecución.</span></div>
+              <div className="lunar-document-actions"><a href="/Guia_Desarrollo_Agil_Servicios_Turisticos_UMSA.pdf" target="_blank" rel="noopener noreferrer">Abrir guía <ExternalLink aria-hidden="true" /></a><a href="/Guia_Desarrollo_Agil_Servicios_Turisticos_UMSA.pdf" download="Guia_Desarrollo_Agil_Servicios_Turisticos_UMSA.pdf">Descargar <Download aria-hidden="true" /></a></div>
+            </motion.article>
+          </div>
         </div>
       </div></section>
 
