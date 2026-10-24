@@ -7,5 +7,5 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params; const item = getProductTwoStation(slug); if (!item) notFound();
-  return <ProductTwoDetail station={item} />;
+  return <ProductTwoDetail slug={item.slug} />;
 }

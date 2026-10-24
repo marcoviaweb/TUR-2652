@@ -1,11 +1,11 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import Image from "next/image";
 import { ArrowDown, ArrowLeft, ArrowRight, CheckCircle2, Lightbulb, MapPin, MoveRight, Sparkles } from "lucide-react";
 import { ProductTwoHeader } from "@/components/product-two-header";
-import { ProductTwoVisual } from "@/components/product-two-visual";
 import { KanbanDemo } from "@/components/kanban-demo";
-import { ProductTwoStation, statikStations } from "@/lib/product-two";
+import { getProductTwoStation, statikStations } from "@/lib/product-two";
 
 const detailRows: Record<string, { headers: string[]; rows: string[][] }> = {
   "producto-turistico": { headers:["Componente","Definición aplicada","Condición"], rows:[["Experiencia","Teleférico, Valle de la Luna, degustación e inmersión cultural","Medio día · máximo 15 viajeros"],["Equipo","Reservas, 3 guías, 2 apoyos logísticos y conductor","Roles coordinados"],["Movilidad","Vehículo con 15 plazas","Una salida simultánea"],["Cierre","Retorno al hotel y sondeo de opinión","Aprendizaje por grupo"]] },
@@ -18,11 +18,14 @@ const detailRows: Record<string, { headers: string[]; rows: string[][] }> = {
   "medicion-y-mejora": { headers:["Indicador","Valor inicial","Meta · revisión"], rows:[["Confirmación de reservas","36 horas","24 horas · mensual"],["Cambios atendidos el mismo día","5 de 10","10 de 10 · semanal"],["Espera entre atractivos","35 minutos","Menos de 15 · semanal"],["Información al guía a tiempo","2 de 10","10 de 10 · semanal"],["Audios claros y atractivos","5 de 10","8 de 10 · mensual"],["Tarjetas con obstáculo","5 por semana","2 por semana · diaria/semanal"]] },
 };
 
-export function ProductTwoDetail({ station }: { station: ProductTwoStation }) {
+export function ProductTwoDetail({ slug }: { slug: string }) {
+  const station = getProductTwoStation(slug)!;
   const reduce = useReducedMotion(); const index = statikStations.findIndex(item => item.slug === station.slug); const previous = statikStations[index-1]; const next = statikStations[index+1]; const Icon = station.icon; const details = detailRows[station.slug];
+  const heroImages = ["/producto2-valle-hero.webp", "/producto2-teleferico.webp", "/producto2-kanban.webp"];
+  const heroImage = heroImages[index % heroImages.length];
   const reveal = { initial: reduce ? false : { opacity:0,y:28 }, whileInView:{opacity:1,y:0}, viewport:{once:true,amount:.18}, transition:{duration:.6,ease:[.22,1,.36,1] as const} };
   return <main className="p2-page p2-detail">
-    <section className="p2-detail-hero"><div className="p2-grid"/><ProductTwoHeader compact/><div className="p2-shell p2-detail-hero-layout"><motion.div initial={reduce?false:{opacity:0,y:28}} animate={{opacity:1,y:0}} transition={{duration:.75}}><a href="/producto-2#ruta" className="p2-crumb"><ArrowLeft/> Ruta del producto 2</a><span className="p2-kicker"><i/> Estación {String(station.order).padStart(2,"0")} · {station.eyebrow}</span><h1>{station.hero}</h1><p>{station.short}</p><a href="#contenido" className="p2-detail-cta">Explorar el contenido <ArrowDown/></a></motion.div><motion.div initial={reduce?false:{opacity:0,scale:.94}} animate={{opacity:1,scale:1}} transition={{duration:.8}}><ProductTwoVisual variant={station.visual}/><span className="p2-detail-number">{String(station.order).padStart(2,"0")}</span></motion.div></div></section>
+    <section className="p2-detail-hero p2-detail-photo"><div className="p2-detail-photo-bg"><Image src={heroImage} alt="" fill priority sizes="100vw" className="object-cover"/></div><div className="p2-photo-shade"/><div className="p2-grid"/><ProductTwoHeader compact/><div className="p2-shell p2-detail-hero-layout"><motion.div initial={reduce?false:{opacity:0,y:28}} animate={{opacity:1,y:0}} transition={{duration:.75}}><a href="/producto-2#ruta" className="p2-crumb"><ArrowLeft/> Ruta del producto 2</a><span className="p2-kicker"><i/> Estación {String(station.order).padStart(2,"0")} · {station.eyebrow}</span><h1>{station.hero}</h1><p>{station.short}</p><a href="#contenido" className="p2-detail-cta">Explorar el contenido <ArrowDown/></a></motion.div><span className="p2-detail-number">{String(station.order).padStart(2,"0")}</span></div></section>
     <section id="contenido" className="p2-detail-intro"><div className="p2-shell"><motion.div {...reveal} className="p2-detail-definition"><span><Icon/></span><div><small>Definición</small><h2>{station.title}</h2><p>{station.definition}</p></div></motion.div><motion.aside {...reveal}><Sparkles/><small>Valor para el visitante</small><p>{station.touristValue}</p></motion.aside></div></section>
     <section className="p2-evidence"><div className="p2-shell"><motion.div {...reveal} className="p2-heading"><div><span>Aplicación al caso</span><h2>Lo que deja visible esta estación.</h2></div><p>La información se obtiene del servicio turístico y se convierte en decisiones que el equipo puede observar y revisar.</p></motion.div><div className="p2-findings">{station.findings.map((finding,i)=><motion.article initial={reduce?false:{opacity:0,y:22}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*.055}} key={finding}><span>{String(i+1).padStart(2,"0")}</span><CheckCircle2/><p>{finding}</p></motion.article>)}</div></div></section>
     <section className="p2-data"><div className="p2-shell"><motion.div {...reveal} className="p2-heading p2-heading-light"><div><span>Evidencia completa</span><h2>Del dato a la decisión.</h2></div><p>Estos son los elementos concretos utilizados para construir el sistema del tour.</p></motion.div><motion.div {...reveal} className="p2-table-wrap"><table><thead><tr>{details.headers.map(h=><th key={h}>{h}</th>)}</tr></thead><tbody>{details.rows.map((row,i)=><tr key={i}>{row.map((cell,j)=><td key={j}>{cell}</td>)}</tr>)}</tbody></table></motion.div>{station.slug === "tablero-kanban" && <KanbanDemo/>}</div></section>
