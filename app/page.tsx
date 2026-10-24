@@ -17,8 +17,8 @@ const abilities = [
   { icon: Leaf, label: "Liderar cambios con impacto sostenible" },
 ];
 const products = [
-  { number: "01", title: "Diseña un producto turístico con Scrum", official: "Producto turístico desarrollado mediante Scrum", description: "Convierte una idea en una propuesta sostenible mediante Sprints, colaboración e inspección continua.", tags: ["Scrum", "Producto turístico", "Trabajo en equipo"], status: "Contenido preparado", available: true },
-  { number: "02", title: "Valida una experiencia turística viable", official: "Producto Turístico Mínimo Viable (MVT) validado", description: "Investiga necesidades, construye un prototipo y valida su propuesta de valor con usuarios reales.", tags: ["Design Thinking", "Lean Startup", "Kanban"], status: "Próximamente", available: false },
+  { number: "01", href: "/producto-1", title: "Diseña un producto turístico con Scrum", official: "Producto turístico desarrollado mediante Scrum", description: "Convierte una idea en una propuesta sostenible mediante Sprints, colaboración e inspección continua.", tags: ["Scrum", "Producto turístico", "Trabajo en equipo"], status: "Contenido preparado", available: true },
+  { number: "02", href: "/producto-2", title: "Valida una experiencia turística viable", official: "Sistema de trabajo turístico validado", description: "Transforma la demanda real en un flujo visible, limita la sobrecarga y mejora la experiencia mediante Lean, Kanban y STATIK.", tags: ["Lean", "Kanban", "STATIK"], status: "Contenido preparado", available: true },
   { number: "03", title: "Transforma una organización o destino", official: "Plan de Transformación Ágil para una organización o destino turístico", description: "Diseña una estrategia de cambio que integra liderazgo, cultura, innovación y sostenibilidad.", tags: ["Liderazgo ágil", "ADKAR", "Innovación"], status: "Próximamente", available: false },
 ];
 const learningPath = ["Comprender", "Crear", "Validar", "Transformar"];
@@ -100,9 +100,9 @@ export default function Home() {
               <div className="flex items-start justify-between gap-4"><span className="product-number">{product.number}</span><Badge className={product.available ? "bg-secondary text-secondary-foreground" : "bg-slate-100 text-slate-500"}>{!product.available && <LockKeyhole aria-hidden="true" className="mr-1 size-3" />}{product.status}</Badge></div>
               <h3 className="mt-14 text-2xl font-black leading-[1.08] tracking-[-0.035em] sm:text-[1.75rem]">{product.title}</h3><p className="mt-3 text-sm font-semibold leading-relaxed text-primary">{product.official}</p><p className="mt-5 leading-relaxed text-slate-600">{product.description}</p>
               <div className="mt-7 flex flex-wrap gap-2">{product.tags.map((tag) => <span key={tag} className="topic-chip">{tag}</span>)}</div>
-              <div className="mt-auto pt-10">{product.available ? <div className="flex items-center justify-between border-t border-slate-200 pt-5 text-sm font-extrabold text-[#071a35]"><span>Explorar Producto 1</span><span className="product-arrow"><ArrowUpRight aria-hidden="true" className="size-5" /></span></div> : <div className="border-t border-slate-200 pt-5 text-sm font-semibold text-slate-400">Se habilitará durante el semestre</div>}</div>
+              <div className="mt-auto pt-10">{product.available ? <div className="flex items-center justify-between border-t border-slate-200 pt-5 text-sm font-extrabold text-[#071a35]"><span>Explorar Producto {Number(product.number)}</span><span className="product-arrow"><ArrowUpRight aria-hidden="true" className="size-5" /></span></div> : <div className="border-t border-slate-200 pt-5 text-sm font-semibold text-slate-400">Se habilitará durante el semestre</div>}</div>
             </motion.article>;
-            return product.available ? <a key={product.number} href="/producto-1" className="product-card-link rounded-[2rem] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-primary">{card}</a> : <div key={product.number}>{card}</div>;
+            return product.available ? <a key={product.number} href={product.href} className="product-card-link rounded-[2rem] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-primary">{card}</a> : <div key={product.number}>{card}</div>;
           })}
         </div>
       </section>
