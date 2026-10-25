@@ -17,7 +17,7 @@ export function KanbanDemo({ compact = false }: { compact?: boolean }) {
   const reduceMotion = useReducedMotion();
   return <div className={`kanban-demo ${compact ? "kanban-demo-compact" : ""}`}>
     <div className="kanban-toolbar"><div><Filter aria-hidden="true" /><span>Filtrar tarjetas</span></div><div role="group" aria-label="Filtrar por clase de servicio">{filters.map(item => <button key={item.id} className={filter === item.id ? "active" : ""} onClick={() => setFilter(item.id)}><i className={`dot-${item.id}`} />{item.label}</button>)}</div></div>
-    <div className="kanban-scroll" tabIndex={0} aria-label="Tablero Kanban desplazable"><div className="kanban-board">
+    <div className="kanban-layout" aria-label="Tablero Kanban adaptable"><div className="kanban-board">
       {kanbanColumns.map((column, columnIndex) => <section className="kanban-column" key={column.title}><header><span>{String(columnIndex + 1).padStart(2, "0")}</span><h3>{column.title}</h3><small>{column.limit}</small></header><div className="kanban-card-list">
         <AnimatePresence mode="popLayout">{column.cards.filter(card => filter === "all" || card.type === filter).map((card, index) => <motion.button layout initial={reduceMotion ? false : { opacity: 0, scale: .94 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: .94 }} transition={{ delay: index * .025 }} key={card.title} className={`kanban-card card-${card.type}`} onClick={() => setSelected(card)}><i /><strong>{card.title}</strong><span>{card.meta}</span><small>Ver detalle</small></motion.button>)}</AnimatePresence>
         {column.cards.filter(card => filter === "all" || card.type === filter).length === 0 && <div className="kanban-empty">Sin tarjetas visibles</div>}
